@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
     Card, Button, CardHeader, CardBody,
     CardText, Col
@@ -14,7 +13,7 @@ const PeopleCard = ({ props }) => {
     return (
         <Col sm="12" md="4">
             <StyledCard>
-                <CardHeader>{props.name}</CardHeader>
+                <CardHeader><h2>{props.name}</h2></CardHeader>
                 <CardBody>
                     <CardText>Gender: {props.gender}</CardText>
                     <CardText>Birth Year: {props.birth_year}</CardText>

@@ -91,7 +91,7 @@ It is better to submit a challenge that meets [MVP](https://en.wikipedia.org/wik
 ## Stretch Problems
 - [ ] Next week we will be looking at React forms. Look a head and try to create a search form that will filter through the data displayed from your characters. 
 
-- [ ] Build a pagination system that will allow you to load the next page of data.
+- [x] Build a pagination system that will allow you to load the next page of data.
   - `console.log()` the data coming back from the server.
   - Notice that there are `next` and `previous` fields that give you a URL.
   - You can build a function that will get characters called `getCharacters` that you can use dynamically to get the next or previous set of characters. You would need to supply it with the proper fields, and you'll need to set up more state to do this.
