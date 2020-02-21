@@ -41,7 +41,7 @@ const App = () => {
       <PageButtons pageButtonClick={pageButtonClick} prevDisabled={prevBtnDisabled} nextDisabled={nextBtnDisabled} />
       <Container>
         <Row>
-          {peopleData.map(person => <PeopleCard props={person} />)}
+          {peopleData.map((person, index) => <PeopleCard key={index} props={person} />)}
         </Row>
       </Container>
       <PageButtons pageButtonClick={pageButtonClick} prevDisabled={prevBtnDisabled} nextDisabled={nextBtnDisabled} />

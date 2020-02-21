@@ -7,6 +7,10 @@ const PageButtonsDiv = styled.div`
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+
+    Button {
+        margin: 2% 0;
+    }
 `;
 
 const PageButtons = ({ pageButtonClick, prevDisabled, nextDisabled }) => {

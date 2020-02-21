@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    Card, Button, CardHeader, CardBody,
+    Card, CardHeader, CardBody,
     CardText, Col
 } from 'reactstrap';
 import styled from "styled-components";
@@ -19,7 +19,6 @@ const PeopleCard = ({ props }) => {
                     <CardText>Birth Year: {props.birth_year}</CardText>
                     <CardText>Hair Color: {props.hair_color}</CardText>
                     <CardText>Height: {props.height}</CardText>
-                    <Button>More Info</Button>
                 </CardBody>
             </StyledCard>
         </Col>
