@@ -12,20 +12,36 @@ const App = () => {
   // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
-  const [peopleData, setPeopleData] = useState([]);
+  const [peopleData, setPeopleData] = useState({ 1: { results: [] } });
   const [currentPage, setCurrentPage] = useState(1);
+  const [renderCards, setRenderCards] = useState(<div />);
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
 
   useEffect(() => {
-    axios.get(`https://swapi.co/api/people/?page=${currentPage}`)
-      .then(res => {
-        setPeopleData(res.data.results);
-        res.data.next ? setNextBtnDisabled(false) : setNextBtnDisabled(true);
-        res.data.previous ? setPrevBtnDisabled(false) : setPrevBtnDisabled(true);
-      })
-      .catch(err => console.log(err));
-  }, [currentPage]);
+    console.log('test');
+    const pageSetup = () => {
+      peopleData[currentPage].next ? setNextBtnDisabled(false) : setNextBtnDisabled(true);
+      peopleData[currentPage].previous ? setPrevBtnDisabled(false) : setPrevBtnDisabled(true);
+      setRenderCards(peopleData[currentPage].results.map((person, index) => <PeopleCard key={index} props={person} />));
+    }
+
+    if (!peopleData[currentPage] || !peopleData[currentPage].results.length) {
+      console.log('fetching data');
+      axios.get(`https://swapi.co/api/people/?page=${currentPage}`)
+        .then(res => {
+          const newPeopleData = peopleData;
+          newPeopleData[currentPage] = res.data;
+          // const newPeopleData = { ...peopleData, [currentPage]: res.data }
+          console.log(newPeopleData);
+          setPeopleData(newPeopleData)
+          pageSetup();
+        })
+        .catch(err => console.log(err));
+    } else {
+      pageSetup();
+    }
+  }, [currentPage, peopleData]);
 
   const pageButtonClick = (e) => {
     if (e.target.classList.contains("next")) {
@@ -41,7 +57,7 @@ const App = () => {
       <PageButtons pageButtonClick={pageButtonClick} prevDisabled={prevBtnDisabled} nextDisabled={nextBtnDisabled} />
       <Container>
         <Row>
-          {peopleData.map((person, index) => <PeopleCard key={index} props={person} />)}
+          {renderCards}
         </Row>
       </Container>
       <PageButtons pageButtonClick={pageButtonClick} prevDisabled={prevBtnDisabled} nextDisabled={nextBtnDisabled} />
